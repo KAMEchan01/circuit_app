@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIRCUIT - 筋トレ・ダイエットアプリ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            font-size: 3em;
+            font-weight: bold;
+            color: #ff6b6b;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+        
+        .streak-display {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            border: 2px solid #ff6b6b;
+        }
+        
+        .streak-number {
+            font-size: 2.5em;
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+        
+        .workout-section {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .timer-display {
+            font-size: 4em;
+            color: #ff6b6b;
+            font-weight: bold;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .exercise-display {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+        
+        .set-counter {
+            font-size: 1.5em;
+            margin: 15px 0;
+            opacity: 0.9;
+        }
+        
+        .start-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            border: none;
+            border-radius: 50px;
+            padding: 15px 40px;
+            font-size: 1.5em;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.3);
+        }
+        
+        .start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,107,107,0.4);
+        }
+        
+        .calories-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .calorie-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .calorie-number {
+            font-size: 2em;
+            color: #4ecdc4;
+            font-weight: bold;
+        }
+        
+        .calorie-label {
+            font-size: 1.1em;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .nav-tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .nav-tab.active {
+            background: #ff6b6b;
+        }
+        
+        .tab-content {
+            display: none;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .meal-input {
+            margin-bottom: 15px;
+        }
+        
+        .meal-input label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .meal-input input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            font-size: 1em;
+        }
+        
+        .meal-input input::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+        
+        .exercise-grid {
+            display: none;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+            padding: 10px;
+        }
+        
+        .exercise-card {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            font-size: 0.9em;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .exercise-card.current {
+            border-color: #ff6b6b;
+            background: rgba(255,107,107,0.3);
+            transform: scale(1.05);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+            width: 0%;
+            transition: width 0.1s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">CIRCUIT</div>
+            <div class="subtitle">F1スタイル筋トレ・ダイエットアプリ</div>
+        </div>
+        
+        <div class="streak-display">
+            <div class="streak-number" id="streakCounter">0</div>
+            <div>日連続完走中🏎️</div>
+        </div>
+        
+        <div class="workout-section">
+            <h2>タバタ式ワークアウト (4分間)</h2>
+            <div class="timer-display" id="timerDisplay">5</div>
+            <div class="exercise-display" id="exerciseDisplay">スタートボタンを押してください</div>
+            <div class="exercise-image" id="exerciseImage" style="display: none;">
+                <img id="currentExerciseImg" src="" alt="運動画像" style="max-width: 200px; max-height: 200px; border-radius: 10px; margin: 10px 0;">
+            </div>
+            <div class="set-counter" id="setCounter">セット: 0/8</div>
+            <div class="next-exercise" id="nextExercise" style="display: none; margin: 10px 0; padding: 10px; background: rgba(255,255,255,0.2); border-radius: 8px;">
+                <div style="font-size: 0.9em; opacity: 0.8;">Next:</div>
+                <div id="nextExerciseName" style="font-weight: bold; color: #4ecdc4;"></div>
+                <img id="nextExerciseImg" src="" alt="次の運動" style="max-width: 100px; max-height: 100px; border-radius: 5px; margin-top: 5px;">
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            <button class="start-btn" id="startBtn" onclick="startWorkout()">スタート🏁</button>
+            
+            <div class="exercise-grid" id="exerciseGrid">
+                <div class="exercise-card">プッシュアップ</div>
+                <div class="exercise-card">シットアップ</div>
+                <div class="exercise-card">スクワット</div>
+                <div class="exercise-card">ジャンピングジャック</div>
+                <div class="exercise-card">マウンテンクライマー</div>
+                <div class="exercise-card">プッシュアップ</div>
+                <div class="exercise-card">ロシアンツイスト</div>
+                <div class="exercise-card">スクワット</div>
+            </div>
+        </div>
+        
+        <div class="calories-section">
+            <div class="calorie-card">
+                <div class="calorie-number" id="intakeCalories">0</div>
+                <div class="calorie-label">摂取カロリー</div>
+            </div>
+            <div class="calorie-card">
+                <div class="calorie-number" id="burnedCalories">0</div>
+                <div class="calorie-label">消費カロリー</div>
+            </div>
+        </div>
+        
+        <div class="nav-tabs">
+            <div class="nav-tab active" onclick="showTab('food')">食事記録</div>
+            <div class="nav-tab" onclick="showTab('exercise')">運動記録</div>
+        </div>
+        
+        <div id="foodTab" class="tab-content active">
+            <div class="meal-input">
+                <label>朝食</label>
+                <input type="text" placeholder="例: ご飯、味噌汁、卵焼き" onchange="calculateCalories()">
+            </div>
+            <div class="meal-input">
+                <label>昼食</label>
+                <input type="text" placeholder="例: パスタ、サラダ" onchange="calculateCalories()">
+            </div>
+            <div class="meal-input">
+                <label>夕食</label>
+                <input type="text" placeholder="例: 焼き魚、ご飯、野菜炒め" onchange="calculateCalories()">
+            </div>
+            <div class="meal-input">
+                <label>間食</label>
+                <input type="text" placeholder="例: チョコレート、コーヒー" onchange="calculateCalories()">
+            </div>
+        </div>
+        
+        <div id="exerciseTab" class="tab-content">
+            <div class="meal-input">
+                <label>ランニング時間 (分)</label>
+                <input type="number" placeholder="30" onchange="calculateBurnedCalories()">
+            </div>
+            <div class="meal-input">
+                <label>ウォーキング歩数</label>
+                <input type="number" placeholder="8000" onchange="calculateBurnedCalories()">
+            </div>
+            <div class="meal-input">
+                <label>筋トレ時間 (分)</label>
+                <input type="number" placeholder="20" onchange="calculateBurnedCalories()">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const exercises = ['プッシュアップ', 'シットアップ', 'スクワット', 'ジャンピングジャック', 'ロシアンツイスト', 'マウンテンクライマー'];
+        let currentSet = 0;
+        let isRest = false;
+        let isCountdown = false;
+        let timeLeft = 20;
+        let workoutTimer = null;
+        let workoutSequence = [];
+        
+        // 画像パスの定義（実際の画像ファイルに合わせて調整してください）
+        const exerciseImages = {
+            'プッシュアップ': 'images/pushup.jpg',
+            'シットアップ': 'images/situp.jpg',
+            'スクワット': 'images/squat.jpg',
+            'ジャンピングジャック': 'images/jumping_jack.jpg',
+            'ロシアンツイスト': 'images/russian_twist.jpg',
+            'マウンテンクライマー': 'images/mountain_climber.jpg'
+        };
+        
+        // ワークアウト開始
+        function startWorkout() {
+            const startBtn = document.getElementById('startBtn');
+            const exerciseGrid = document.getElementById('exerciseGrid');
+            
+            if (startBtn.textContent === 'スタート🏁') {
+                // ランダムな運動シーケンスを生成（連続重複なし、最大2回まで）
+                workoutSequence = [];
+                const exerciseCount = {};
+                
+                for (let i = 0; i < 8; i++) {
+                    let selectedExercise;
+                    let attempts = 0;
+                    const maxAttempts = 50;
+                    
+                    do {
+                        const randomIndex = Math.floor(Math.random() * exercises.length);
+                        selectedExercise = exercises[randomIndex];
+                        attempts++;
+                    } while (
+                        attempts < maxAttempts && 
+                        (
+                            // 連続する同じメニューを防ぐ
+                            (i > 0 && selectedExercise === workoutSequence[i - 1]) ||
+                            // 2回以上同じメニューが表示されないよう制限
+                            (exerciseCount[selectedExercise] >= 2)
+                        )
+                    );
+                    
+                    workoutSequence.push(selectedExercise);
+                    exerciseCount[selectedExercise] = (exerciseCount[selectedExercise] || 0) + 1;
+                }
+                
+                // 運動カードを表示
+                exerciseGrid.style.display = 'grid';
+                const cards = exerciseGrid.children;
+                for (let i = 0; i < 8; i++) {
+                    cards[i].textContent = workoutSequence[i];
+                }
+                
+                currentSet = 0;
+                isRest = false;
+                isCountdown = true;
+                timeLeft = 5; // 5秒カウントダウンから開始
+                startBtn.textContent = '停止';
+                
+                // 最初のメニューを表示
+                showCurrentExercise();
+                
+                startTimer();
+            } else {
+                stopWorkout();
+            }
+        }
+        
+        function startTimer() {
+            workoutTimer = setInterval(() => {
+                timeLeft--;
+                updateDisplay();
+                
+                if (timeLeft <= 0) {
+                    if (isCountdown) {
+                        // カウントダウン終了、ワークアウト開始
+                        isCountdown = false;
+                        timeLeft = 20;
+                        showCurrentExercise();
+                    } else if (isRest) {
+                        // 休憩終了、次のセット開始
+                        currentSet++;
+                        if (currentSet >= 8) {
+                            completeWorkout();
+                            return;
+                        }
+                        isRest = false;
+                        timeLeft = 20;
+                        showCurrentExercise();
+                    } else {
+                        // 運動終了、休憩開始
+                        isRest = true;
+                        timeLeft = 10;
+                        hideExerciseImage();
+                    }
+                }
+                
+                // レスト中で残り5秒の時に次のメニューを表示
+                if (isRest && timeLeft === 5 && currentSet < 7) {
+                    showNextExercise();
+                }
+            }, 1000);
+        }
+        
+        function updateDisplay() {
+            const timerDisplay = document.getElementById('timerDisplay');
+            const exerciseDisplay = document.getElementById('exerciseDisplay');
+            const setCounter = document.getElementById('setCounter');
+            const progressBar = document.getElementById('progressBar');
+            const exerciseCards = document.getElementById('exerciseGrid').children;
+            
+            // タイマー表示
+            if (isCountdown) {
+                timerDisplay.textContent = timeLeft;
+                timerDisplay.style.color = '#ff6b6b';
+                timerDisplay.style.fontSize = '5em';
+            } else {
+                timerDisplay.textContent = `0:${timeLeft.toString().padStart(2, '0')}`;
+                timerDisplay.style.fontSize = '4em';
+            }
+            
+            // 運動/休憩表示
+            if (isCountdown) {
+                exerciseDisplay.textContent = `準備: ${workoutSequence[0]}`;
+                exerciseDisplay.style.background = 'rgba(255, 107, 107, 0.3)';
+            } else if (isRest) {
+                exerciseDisplay.textContent = '休憩中...';
+                exerciseDisplay.style.background = 'rgba(76, 205, 196, 0.3)';
+            } else {
+                exerciseDisplay.textContent = workoutSequence[currentSet];
+                exerciseDisplay.style.background = 'rgba(255, 107, 107, 0.3)';
+            }
+            
+            // セットカウンター
+            if (isCountdown) {
+                setCounter.textContent = `準備中...`;
+            } else {
+                setCounter.textContent = `セット: ${currentSet + (isRest ? 1 : 1)}/8`;
+            }
+            
+            // プログレスバー
+            let totalProgress = 0;
+            if (!isCountdown) {
+                totalProgress = ((currentSet * 30) + (isRest ? 20 : (20 - timeLeft))) / 240 * 100;
+            }
+            progressBar.style.width = totalProgress + '%';
+            
+            // 現在の運動をハイライト
+            for (let i = 0; i < exerciseCards.length; i++) {
+                exerciseCards[i].classList.remove('current');
+            }
+            if (!isRest && !isCountdown && currentSet < 8) {
+                exerciseCards[currentSet].classList.add('current');
+            }
+        }
+        
+        function completeWorkout() {
+            clearInterval(workoutTimer);
+            document.getElementById('timerDisplay').textContent = '完了!';
+            document.getElementById('exerciseDisplay').textContent = 'お疲れ様でした！🏆';
+            document.getElementById('startBtn').textContent = 'スタート🏁';
+            document.getElementById('exerciseGrid').style.display = 'none';
+            hideExerciseImage();
+            hideNextExercise();
+            
+            // ストリーク更新
+            const streakCounter = document.getElementById('streakCounter');
+            let currentStreak = parseInt(streakCounter.textContent) || 0;
+            streakCounter.textContent = currentStreak + 1;
+            
+            // 消費カロリー追加
+            const burnedCalories = document.getElementById('burnedCalories');
+            let current = parseInt(burnedCalories.textContent) || 0;
+            burnedCalories.textContent = current + 50; // タバタ4分で約50kcal
+        }
+        
+        function stopWorkout() {
+            clearInterval(workoutTimer);
+            document.getElementById('timerDisplay').textContent = '5';
+            document.getElementById('exerciseDisplay').textContent = 'スタートボタンを押してください';
+            document.getElementById('setCounter').textContent = 'セット: 0/8';
+            document.getElementById('progressBar').style.width = '0%';
+            document.getElementById('startBtn').textContent = 'スタート🏁';
+            document.getElementById('exerciseGrid').style.display = 'none';
+            hideExerciseImage();
+            hideNextExercise();
+            currentSet = 0;
+            isRest = false;
+            isCountdown = false;
+            timeLeft = 5;
+        }
+        
+        // 現在の運動画像を表示
+        function showCurrentExercise() {
+            const exerciseImage = document.getElementById('exerciseImage');
+            const currentImg = document.getElementById('currentExerciseImg');
+            const exerciseName = workoutSequence[currentSet];
+            
+            if (exerciseImages[exerciseName]) {
+                currentImg.src = exerciseImages[exerciseName];
+                currentImg.alt = exerciseName;
+                exerciseImage.style.display = 'block';
+            }
+            hideNextExercise();
+        }
+        
+        // 運動画像を非表示
+        function hideExerciseImage() {
+            document.getElementById('exerciseImage').style.display = 'none';
+        }
+        
+        // 次の運動を表示（レスト5秒前）
+        function showNextExercise() {
+            const nextExercise = document.getElementById('nextExercise');
+            const nextExerciseName = document.getElementById('nextExerciseName');
+            const nextImg = document.getElementById('nextExerciseImg');
+            const nextExerciseTitle = workoutSequence[currentSet + 1];
+            
+            nextExerciseName.textContent = nextExerciseTitle;
+            if (exerciseImages[nextExerciseTitle]) {
+                nextImg.src = exerciseImages[nextExerciseTitle];
+                nextImg.alt = nextExerciseTitle;
+            }
+            nextExercise.style.display = 'block';
+        }
+        
+        // 次の運動表示を非表示
+        function hideNextExercise() {
+            document.getElementById('nextExercise').style.display = 'none';
+        }
+        
+        function showTab(tabName) {
+            // タブの切り替え
+            const tabs = document.querySelectorAll('.nav-tab');
+            const contents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            contents.forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName + 'Tab').classList.add('active');
+        }
+        
+        function calculateCalories() {
+            // 簡易的なカロリー計算（実際にはより詳細な計算が必要）
+            const inputs = document.querySelectorAll('#foodTab input');
+            let totalCalories = 0;
+            
+            inputs.forEach(input => {
+                if (input.value.trim()) {
+                    // 簡易計算（文字数 × 10kcal程度）
+                    totalCalories += input.value.length * 10;
+                }
+            });
+            
+            document.getElementById('intakeCalories').textContent = totalCalories;
+        }
+        
+        function calculateBurnedCalories() {
+            const runningInput = document.querySelector('#exerciseTab input[placeholder="30"]');
+            const walkingInput = document.querySelector('#exerciseTab input[placeholder="8000"]');
+            const strengthInput = document.querySelector('#exerciseTab input[placeholder="20"]');
+            
+            let totalBurned = 0;
+            
+            if (runningInput.value) {
+                totalBurned += parseInt(runningInput.value) * 8; // 分 × 8kcal
+            }
+            if (walkingInput.value) {
+                totalBurned += parseInt(walkingInput.value) * 0.04; // 歩数 × 0.04kcal
+            }
+            if (strengthInput.value) {
+                totalBurned += parseInt(strengthInput.value) * 5; // 分 × 5kcal
+            }
+            
+            document.getElementById('burnedCalories').textContent = Math.round(totalBurned);
+        }
+        
+        // 初期化
+        document.addEventListener('DOMContentLoaded', function() {
+            // ローカルストレージからストリーク読み込み
+            const savedStreak = localStorage.getItem('circuitStreak') || 0;
+            document.getElementById('streakCounter').textContent = savedStreak;
+        });
+    </script>
+</body>
+</html>
