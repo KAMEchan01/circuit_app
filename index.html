@@ -346,6 +346,28 @@
             'マウンテンクライマー': 'images/mountain_climber.jpg'
         };
         
+        // 効果音の定義
+        const soundEffects = {
+            startExercise: new Audio('sounds/start_exercise.mp3'),
+            endExercise: new Audio('sounds/end_exercise.mp3'),
+            countdown: new Audio('sounds/countdown.mp3'),
+            workoutComplete: new Audio('sounds/workout_complete.mp3')
+        };
+        
+        // 効果音再生機能
+        function playSound(soundType) {
+            try {
+                if (soundEffects[soundType]) {
+                    soundEffects[soundType].currentTime = 0;
+                    soundEffects[soundType].play().catch(error => {
+                        console.log('音声再生エラー:', error);
+                    });
+                }
+            } catch (error) {
+                console.log('音声ファイルが見つかりません:', soundType);
+            }
+        }
+        
         // ワークアウト開始
         function startWorkout() {
             const startBtn = document.getElementById('startBtn');
@@ -411,6 +433,7 @@
                         // カウントダウン終了、ワークアウト開始
                         isCountdown = false;
                         timeLeft = 20;
+                        playSound('startExercise');
                         showCurrentExercise();
                     } else if (isRest) {
                         // 休憩終了、次のセット開始
@@ -421,11 +444,13 @@
                         }
                         isRest = false;
                         timeLeft = 20;
+                        playSound('startExercise');
                         showCurrentExercise();
                     } else {
                         // 運動終了、休憩開始
                         isRest = true;
                         timeLeft = 10;
+                        playSound('endExercise');
                         hideExerciseImage();
                     }
                 }
@@ -449,6 +474,10 @@
                 timerDisplay.textContent = timeLeft;
                 timerDisplay.style.color = '#ff6b6b';
                 timerDisplay.style.fontSize = '5em';
+                // カウントダウン時の効果音（1-3秒）
+                if (timeLeft <= 3 && timeLeft > 0) {
+                    playSound('countdown');
+                }
             } else {
                 timerDisplay.textContent = `0:${timeLeft.toString().padStart(2, '0')}`;
                 timerDisplay.style.fontSize = '4em';
@@ -491,6 +520,7 @@
         
         function completeWorkout() {
             clearInterval(workoutTimer);
+            playSound('workoutComplete');
             document.getElementById('timerDisplay').textContent = '完了!';
             document.getElementById('exerciseDisplay').textContent = 'お疲れ様でした！🏆';
             document.getElementById('startBtn').textContent = 'スタート🏁';
