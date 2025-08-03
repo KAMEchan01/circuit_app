@@ -34,7 +34,7 @@
             font-size: 3em;
             font-weight: bold;
             color: #ff6b6b;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 4px 4px 8px rgba(128,128,128,0.6);
             margin-bottom: 10px;
         }
         
@@ -69,10 +69,10 @@
         
         .timer-display {
             font-size: 4em;
-            color: #ff6b6b;
+            color: #ff0000;
             font-weight: bold;
             margin: 20px 0;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 4px 4px 8px rgba(128,128,128,0.6), 1px 1px 2px rgba(255,255,255,0.8);
         }
         
         .exercise-display {
@@ -327,115 +327,10 @@
         </div>
     </div>
 
-    <!-- Statistics Page -->
-    <div id="statisticsPage" class="container" style="display: none;">
-        <div class="header">
-            <div class="logo">CIRCUIT - 記録</div>
-        </div>
-
-            <!-- Summary Cards -->
-            <div class="summary-section" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 30px;">
-                <div class="calorie-card">
-                    <div class="calorie-number" id="streakCounterStats">0</div>
-                    <div class="calorie-label">連続完走</div>
-                </div>
-                <div class="calorie-card">
-                    <div class="calorie-number" id="intakeCaloriesStats">0</div>
-                    <div class="calorie-label">摂取カロリー</div>
-                </div>
-                <div class="calorie-card">
-                    <div class="calorie-number" id="burnedCaloriesStats">0</div>
-                    <div class="calorie-label">消費カロリー</div>
-                </div>
-            </div>
-
-            <!-- Progress Chart -->
-            <div class="progress-section" style="background: rgba(255,255,255,0.1); border-radius: 15px; padding: 20px; margin-bottom: 30px;">
-                <h3 style="margin-bottom: 15px; text-align: center;">📈 今週の進捗</h3>
-                <div class="week-progress" id="weekProgress" style="display: flex; justify-content: space-between; align-items: end; height: 100px; padding: 10px;">
-                    <!-- Week progress bars will be generated here -->
-                </div>
-                <div class="week-labels" style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 0.8em; opacity: 0.8;">
-                    <span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span>土</span><span>日</span>
-                </div>
-            </div>
-
-            <!-- Today's Record -->
-            <div class="today-record" style="background: rgba(255,255,255,0.1); border-radius: 15px; padding: 20px; margin-bottom: 20px;">
-                <h3 style="margin-bottom: 15px; text-align: center;">📝 今日の記録</h3>
-                <div class="record-date" style="text-align: center; margin-bottom: 15px; opacity: 0.8;" id="todayDate">
-                    <!-- Today's date will be inserted here -->
-                </div>
-            </div>
-
-            <!-- Navigation Tabs -->
-            <div class="nav-tabs">
-                <div class="nav-tab active" onclick="showTabStats('food')">食事記録</div>
-                <div class="nav-tab" onclick="showTabStats('exercise')">運動記録</div>
-                <div class="nav-tab" onclick="showTabStats('history')">履歴</div>
-            </div>
-
-            <!-- Food Tab -->
-            <div id="foodTabStats" class="tab-content active">
-                <div class="meal-input">
-                    <label>朝食 <span style="font-size: 0.8em; opacity: 0.6;">(kcal)</span></label>
-                    <input type="text" id="breakfast" placeholder="例: ご飯、味噌汁、卵焼き (約400kcal)" onchange="calculateCaloriesStats()">
-                </div>
-                <div class="meal-input">
-                    <label>昼食 <span style="font-size: 0.8em; opacity: 0.6;">(kcal)</span></label>
-                    <input type="text" id="lunch" placeholder="例: パスタ、サラダ (約600kcal)" onchange="calculateCaloriesStats()">
-                </div>
-                <div class="meal-input">
-                    <label>夕食 <span style="font-size: 0.8em; opacity: 0.6;">(kcal)</span></label>
-                    <input type="text" id="dinner" placeholder="例: 焼き魚、ご飯、野菜炒め (約700kcal)" onchange="calculateCaloriesStats()">
-                </div>
-                <div class="meal-input">
-                    <label>間食 <span style="font-size: 0.8em; opacity: 0.6;">(kcal)</span></label>
-                    <input type="text" id="snack" placeholder="例: チョコレート、コーヒー (約200kcal)" onchange="calculateCaloriesStats()">
-                </div>
-                <button class="start-btn" onclick="saveRecord('food')" style="margin-top: 15px; width: 100%;">💾 食事記録を保存</button>
-            </div>
-
-            <!-- Exercise Tab -->
-            <div id="exerciseTabStats" class="tab-content">
-                <div class="meal-input">
-                    <label>ランニング時間 (分)</label>
-                    <input type="number" id="running" placeholder="30" onchange="calculateBurnedCaloriesStats()">
-                </div>
-                <div class="meal-input">
-                    <label>ウォーキング歩数</label>
-                    <input type="number" id="walking" placeholder="8000" onchange="calculateBurnedCaloriesStats()">
-                </div>
-                <div class="meal-input">
-                    <label>筋トレ時間 (分)</label>
-                    <input type="number" id="strength" placeholder="20" onchange="calculateBurnedCaloriesStats()">
-                </div>
-                <div class="meal-input">
-                    <label>その他の運動</label>
-                    <input type="text" id="otherExercise" placeholder="例: サイクリング、水泳など">
-                </div>
-                <button class="start-btn" onclick="saveRecord('exercise')" style="margin-top: 15px; width: 100%;">💾 運動記録を保存</button>
-            </div>
-
-            <!-- History Tab -->
-            <div id="historyTabStats" class="tab-content">
-                <div class="history-controls" style="margin-bottom: 20px; text-align: center;">
-                    <button onclick="showHistoryWeek(-1)" style="background: rgba(255,255,255,0.2); border: none; border-radius: 5px; padding: 10px 15px; color: white; margin: 0 10px; cursor: pointer;">← 前週</button>
-                    <span id="currentWeek" style="font-weight: bold;">今週</span>
-                    <button onclick="showHistoryWeek(1)" style="background: rgba(255,255,255,0.2); border: none; border-radius: 5px; padding: 10px 15px; color: white; margin: 0 10px; cursor: pointer;">次週 →</button>
-                </div>
-                <div id="historyList" class="history-list">
-                    <!-- History records will be loaded here -->
-                </div>
-            </div>
-
-        <button class="start-btn" onclick="showPage('main')" style="margin-top: 20px;">🏠 ホームに戻る</button>
-    </div>
-
     <!-- Navigation -->
     <div class="navigation" style="position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.8); padding: 10px 0; display: flex; justify-content: space-around; z-index: 1000;">
-        <button id="homeBtn" onclick="showPage('main')" style="background: none; border: none; color: white; padding: 10px 20px; cursor: pointer; border-radius: 5px;">🏠 ホーム</button>
-        <button id="recordBtn" onclick="showPage('statistics')" style="background: none; border: none; color: white; padding: 10px 20px; cursor: pointer; border-radius: 5px;">📝 記録</button>
+        <a href="index.html" style="background: rgba(255,107,107,0.3); border: none; color: white; padding: 10px 20px; cursor: pointer; border-radius: 5px; text-decoration: none; display: inline-block;">🏠 ホーム</a>
+        <a href="record.html" style="background: none; border: none; color: white; padding: 10px 20px; cursor: pointer; border-radius: 5px; text-decoration: none; display: inline-block;">📝 記録</a>
     </div>
 
     <footer style="text-align: center; padding: 20px 0; margin-top: 40px; opacity: 0.6; font-size: 0.8em; color: white;">
@@ -443,40 +338,6 @@
     </footer>
 
     <script>
-        // 画面切り替え機能を最初に定義
-        function showPage(pageName) {
-            console.log('showPage called with:', pageName);
-            
-            // すべてのページを非表示に
-            const allContainers = document.querySelectorAll('.container');
-            allContainers.forEach(container => {
-                container.style.display = 'none';
-            });
-            
-            if (pageName === 'main') {
-                // 最初のコンテナ（メインページ）を表示
-                const mainPage = document.querySelector('.container:first-of-type');
-                if (mainPage) {
-                    mainPage.style.display = 'block';
-                    console.log('Main page displayed');
-                }
-            } else if (pageName === 'statistics') {
-                // statisticsPageを表示
-                const statisticsPage = document.getElementById('statisticsPage');
-                if (statisticsPage) {
-                    statisticsPage.style.display = 'block';
-                    console.log('Statistics page displayed');
-                    // 統計画面表示時にデータを同期
-                    try {
-                        syncStatisticsData();
-                    } catch (error) {
-                        console.error('Error syncing statistics data:', error);
-                    }
-                } else {
-                    console.error('Statistics page not found');
-                }
-            }
-        }
 
         const exercises = ['プッシュアップ', 'シットアップ', 'スクワット', 'ジャンピングジャック', 'ロシアンツイスト', 'マウンテンクライマー'];
         let currentSet = 0;
@@ -670,8 +531,9 @@
             // タイマー表示
             if (isCountdown) {
                 timerDisplay.textContent = timeLeft;
-                timerDisplay.style.color = '#ff6b6b';
+                timerDisplay.style.color = '#ff0000';
                 timerDisplay.style.fontSize = '5em';
+                timerDisplay.style.textShadow = '2px 2px 4px rgba(0,0,0,0.3), 4px 4px 8px rgba(128,128,128,0.6), 1px 1px 2px rgba(255,255,255,0.8)';
                 // カウントダウン時の効果音（3秒時のみ1回）
                 if (timeLeft === 3) {
                     playSound('countdown');
@@ -679,6 +541,8 @@
             } else {
                 timerDisplay.textContent = `0:${timeLeft.toString().padStart(2, '0')}`;
                 timerDisplay.style.fontSize = '4em';
+                timerDisplay.style.color = '#ff0000';
+                timerDisplay.style.textShadow = '2px 2px 4px rgba(0,0,0,0.3), 4px 4px 8px rgba(128,128,128,0.6), 1px 1px 2px rgba(255,255,255,0.8)';
             }
             
             // 運動/休憩表示
@@ -881,307 +745,12 @@
             document.getElementById('burnedCalories').textContent = Math.round(totalBurned);
         }
         
-        
-        // 記録データ管理
-        let recordData = {
-            streak: 0,
-            dailyRecords: {},
-            weeklyProgress: []
-        };
-        
-        // 統計データ同期
-        function syncStatisticsData() {
-            // ストリークデータを同期
-            const streakCounter = document.getElementById('streakCounter').textContent;
-            document.getElementById('streakCounterStats').textContent = streakCounter;
-            
-            // 今日の日付を表示
-            const today = new Date();
-            const dateStr = `${today.getFullYear()}年${today.getMonth() + 1}月${today.getDate()}日 (${['日', '月', '火', '水', '木', '金', '土'][today.getDay()]})`;
-            document.getElementById('todayDate').textContent = dateStr;
-            
-            // 今日の記録をロード
-            loadTodayRecord();
-            
-            // 週間進捗を表示
-            updateWeekProgress();
-        }
-        
-        // 今日の記録をロード
-        function loadTodayRecord() {
-            const today = new Date().toDateString();
-            const savedRecords = JSON.parse(localStorage.getItem('circuitRecords') || '{}');
-            
-            if (savedRecords[today]) {
-                const record = savedRecords[today];
-                
-                // 食事記録をロード
-                if (record.food) {
-                    document.getElementById('breakfast').value = record.food.breakfast || '';
-                    document.getElementById('lunch').value = record.food.lunch || '';
-                    document.getElementById('dinner').value = record.food.dinner || '';
-                    document.getElementById('snack').value = record.food.snack || '';
-                }
-                
-                // 運動記録をロード
-                if (record.exercise) {
-                    document.getElementById('running').value = record.exercise.running || '';
-                    document.getElementById('walking').value = record.exercise.walking || '';
-                    document.getElementById('strength').value = record.exercise.strength || '';
-                    document.getElementById('otherExercise').value = record.exercise.other || '';
-                }
-                
-                // カロリー計算を実行
-                calculateCaloriesStats();
-                calculateBurnedCaloriesStats();
-            }
-        }
-        
-        // 記録を保存
-        function saveRecord(type) {
-            const today = new Date().toDateString();
-            const savedRecords = JSON.parse(localStorage.getItem('circuitRecords') || '{}');
-            
-            if (!savedRecords[today]) {
-                savedRecords[today] = {};
-            }
-            
-            if (type === 'food') {
-                savedRecords[today].food = {
-                    breakfast: document.getElementById('breakfast').value,
-                    lunch: document.getElementById('lunch').value,
-                    dinner: document.getElementById('dinner').value,
-                    snack: document.getElementById('snack').value
-                };
-                alert('🍽️ 食事記録を保存しました！');
-            } else if (type === 'exercise') {
-                savedRecords[today].exercise = {
-                    running: document.getElementById('running').value,
-                    walking: document.getElementById('walking').value,
-                    strength: document.getElementById('strength').value,
-                    other: document.getElementById('otherExercise').value
-                };
-                alert('🏃‍♂️ 運動記録を保存しました！');
-            }
-            
-            // タイムスタンプを追加
-            savedRecords[today].timestamp = new Date().toISOString();
-            
-            localStorage.setItem('circuitRecords', JSON.stringify(savedRecords));
-            
-            // 週間進捗を更新
-            updateWeekProgress();
-        }
-        
-        // 週間進捗の更新
-        function updateWeekProgress() {
-            const weekProgress = document.getElementById('weekProgress');
-            const today = new Date();
-            const startOfWeek = new Date(today);
-            startOfWeek.setDate(today.getDate() - today.getDay() + 1); // 月曜日開始
-            
-            const savedRecords = JSON.parse(localStorage.getItem('circuitRecords') || '{}');
-            weekProgress.innerHTML = '';
-            
-            for (let i = 0; i < 7; i++) {
-                const currentDay = new Date(startOfWeek);
-                currentDay.setDate(startOfWeek.getDate() + i);
-                const dateStr = currentDay.toDateString();
-                
-                const hasRecord = savedRecords[dateStr];
-                const height = hasRecord ? Math.min(80, Object.keys(hasRecord).length * 20) : 10;
-                const opacity = hasRecord ? 1 : 0.3;
-                
-                const bar = document.createElement('div');
-                bar.style.cssText = `
-                    background: linear-gradient(to top, #ff6b6b, #4ecdc4);
-                    width: 30px;
-                    height: ${height}px;
-                    border-radius: 3px;
-                    opacity: ${opacity};
-                    transition: all 0.3s;
-                `;
-                
-                if (currentDay.toDateString() === today.toDateString()) {
-                    bar.style.border = '2px solid #fff';
-                }
-                
-                weekProgress.appendChild(bar);
-            }
-        }
-        
-        // 統計画面用カロリー計算関数
-        function calculateCaloriesStats() {
-            const breakfast = document.getElementById('breakfast').value;
-            const lunch = document.getElementById('lunch').value;
-            const dinner = document.getElementById('dinner').value;
-            const snack = document.getElementById('snack').value;
-            
-            // 簡易カロリー推定（実際の実装ではより精密な計算が必要）
-            let totalCalories = 0;
-            
-            if (breakfast) totalCalories += estimateCalories(breakfast, 400);
-            if (lunch) totalCalories += estimateCalories(lunch, 600);
-            if (dinner) totalCalories += estimateCalories(dinner, 700);
-            if (snack) totalCalories += estimateCalories(snack, 200);
-            
-            document.getElementById('intakeCaloriesStats').textContent = totalCalories;
-            document.getElementById('intakeCalories').textContent = totalCalories;
-        }
-        
-        // カロリー推定関数
-        function estimateCalories(foodText, baseCalories) {
-            if (!foodText.trim()) return 0;
-            
-            // 括弧内の数字を検索（例：約400kcal）
-            const calorieMatch = foodText.match(/(\d+)\s*kcal/i);
-            if (calorieMatch) {
-                return parseInt(calorieMatch[1]);
-            }
-            
-            // 基本カロリーに文字数で調整
-            const textLength = foodText.length;
-            return Math.round(baseCalories * (0.8 + textLength * 0.01));
-        }
-        
-        function calculateBurnedCaloriesStats() {
-            const running = parseInt(document.getElementById('running').value) || 0;
-            const walking = parseInt(document.getElementById('walking').value) || 0;
-            const strength = parseInt(document.getElementById('strength').value) || 0;
-            
-            let totalBurned = 0;
-            totalBurned += running * 8; // ランニング: 8kcal/分
-            totalBurned += walking * 0.04; // ウォーキング: 0.04kcal/歩
-            totalBurned += strength * 5; // 筋トレ: 5kcal/分
-            
-            document.getElementById('burnedCaloriesStats').textContent = Math.round(totalBurned);
-            document.getElementById('burnedCalories').textContent = Math.round(totalBurned);
-        }
-        
-        // 履歴表示
-        let currentHistoryWeek = 0;
-        
-        function showHistoryWeek(offset) {
-            currentHistoryWeek += offset;
-            loadHistoryRecords();
-        }
-        
-        function loadHistoryRecords() {
-            const today = new Date();
-            const startOfWeek = new Date(today);
-            startOfWeek.setDate(today.getDate() - today.getDay() + 1 + (currentHistoryWeek * 7));
-            
-            const savedRecords = JSON.parse(localStorage.getItem('circuitRecords') || '{}');
-            const historyList = document.getElementById('historyList');
-            const currentWeekLabel = document.getElementById('currentWeek');
-            
-            // 週のラベルを更新
-            if (currentHistoryWeek === 0) {
-                currentWeekLabel.textContent = '今週';
-            } else if (currentHistoryWeek === -1) {
-                currentWeekLabel.textContent = '先週';
-            } else if (currentHistoryWeek === 1) {
-                currentWeekLabel.textContent = '来週';
-            } else {
-                const weekStart = new Date(startOfWeek);
-                currentWeekLabel.textContent = `${weekStart.getMonth() + 1}/${weekStart.getDate()}の週`;
-            }
-            
-            historyList.innerHTML = '';
-            
-            for (let i = 0; i < 7; i++) {
-                const currentDay = new Date(startOfWeek);
-                currentDay.setDate(startOfWeek.getDate() + i);
-                const dateStr = currentDay.toDateString();
-                const record = savedRecords[dateStr];
-                
-                const dayCard = document.createElement('div');
-                dayCard.style.cssText = `
-                    background: rgba(255,255,255,0.1);
-                    border-radius: 10px;
-                    padding: 15px;
-                    margin-bottom: 10px;
-                    border-left: 4px solid ${record ? '#4ecdc4' : '#666'};
-                `;
-                
-                const dayHeader = `
-                    <div style="font-weight: bold; margin-bottom: 10px;">
-                        ${currentDay.getMonth() + 1}/${currentDay.getDate()} (${['日', '月', '火', '水', '木', '金', '土'][currentDay.getDay()]})
-                    </div>
-                `;
-                
-                if (record) {
-                    let content = dayHeader;
-                    if (record.food) {
-                        content += '<div style="font-size: 0.9em; margin-bottom: 5px;">🍽️ 食事記録あり</div>';
-                    }
-                    if (record.exercise) {
-                        content += '<div style="font-size: 0.9em; margin-bottom: 5px;">🏃‍♂️ 運動記録あり</div>';
-                    }
-                    dayCard.innerHTML = content;
-                } else {
-                    dayCard.innerHTML = dayHeader + '<div style="opacity: 0.6; font-size: 0.9em;">記録なし</div>';
-                }
-                
-                historyList.appendChild(dayCard);
-            }
-        }
-        
-        // 統計画面のタブ切り替え
-        function showTabStats(tabName) {
-            const tabs = document.querySelectorAll('#statisticsPage .nav-tab');
-            const contents = document.querySelectorAll('#statisticsPage .tab-content');
-            
-            tabs.forEach(tab => tab.classList.remove('active'));
-            contents.forEach(content => content.classList.remove('active'));
-            
-            event.target.classList.add('active');
-            document.getElementById(tabName + 'TabStats').classList.add('active');
-            
-            if (tabName === 'history') {
-                loadHistoryRecords();
-            }
-        }
 
         // 初期化
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM loaded, initializing...');
-            
             // ローカルストレージからストリーク読み込み
             const savedStreak = localStorage.getItem('circuitStreak') || 0;
             document.getElementById('streakCounter').textContent = savedStreak;
-            
-            const streakCounterStats = document.getElementById('streakCounterStats');
-            if (streakCounterStats) {
-                streakCounterStats.textContent = savedStreak;
-            }
-            
-            // 関数がグローバルに利用可能かテスト
-            window.showPage = showPage;
-            console.log('showPage function:', typeof showPage);
-            
-            // ナビゲーションボタンのテスト
-            const recordBtn = document.getElementById('recordBtn');
-            const homeBtn = document.getElementById('homeBtn');
-            
-            console.log('Record button found:', !!recordBtn);
-            console.log('Home button found:', !!homeBtn);
-            
-            if (recordBtn) {
-                recordBtn.addEventListener('click', function(e) {
-                    console.log('Record button clicked via event listener');
-                    e.preventDefault();
-                    showPage('statistics');
-                });
-            }
-            
-            if (homeBtn) {
-                homeBtn.addEventListener('click', function(e) {
-                    console.log('Home button clicked via event listener');
-                    e.preventDefault();
-                    showPage('main');
-                });
-            }
         });
     </script>
 </body>
