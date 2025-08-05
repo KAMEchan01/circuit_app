@@ -391,6 +391,9 @@
             workoutComplete: new Audio('sounds/workout_complete.mp3')
         };
         
+        // BGM音楽の定義
+        const backgroundMusic = new Audio('sounds/CIRCUIT.mp3');
+        
         // 効果音再生機能
         function playSound(soundType) {
             try {
@@ -411,6 +414,16 @@
             const exerciseGrid = document.getElementById('exerciseGrid');
             
             if (startBtn.textContent === 'スタート🏁') {
+                // BGM再生開始
+                try {
+                    backgroundMusic.currentTime = 0;
+                    backgroundMusic.loop = true;
+                    backgroundMusic.play().catch(error => {
+                        console.log('BGM再生エラー:', error);
+                    });
+                } catch (error) {
+                    console.log('BGMファイルが見つかりません');
+                }
                 // ランダムな運動シーケンスを生成（6種目全て表示、連続重複なし、最大2回まで）
                 workoutSequence = [];
                 const exerciseCount = {};
@@ -583,6 +596,9 @@
         function completeWorkout() {
             clearInterval(workoutTimer);
             stopImageAnimation();
+            // BGM停止
+            backgroundMusic.pause();
+            backgroundMusic.currentTime = 0;
             playSound('workoutComplete');
             document.getElementById('timerDisplay').textContent = '完了!';
             document.getElementById('exerciseDisplay').textContent = 'お疲れ様でした！🏆';
@@ -605,6 +621,9 @@
         function stopWorkout() {
             clearInterval(workoutTimer);
             stopImageAnimation();
+            // BGM停止
+            backgroundMusic.pause();
+            backgroundMusic.currentTime = 0;
             document.getElementById('timerDisplay').textContent = '5';
             document.getElementById('exerciseDisplay').textContent = 'スタートボタンを押してください';
             document.getElementById('setCounter').textContent = 'セット: 0/8';
