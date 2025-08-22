@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIRCUIT デモデータ設定</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .button {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+        }
+        .button:hover {
+            background: #ff5252;
+        }
+        .status {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        .success {
+            background: #e8f5e8;
+            color: #2d5d2d;
+            border: 1px solid #4caf50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏎️ CIRCUIT デモデータ設定</h1>
+        <p>動画撮影用のサンプルデータをローカルストレージに設定します。</p>
+        
+        <button class="button" onclick="setupDemoData()">デモデータを設定</button>
+        <button class="button" onclick="clearData()">データをクリア</button>
+        <button class="button" onclick="viewData()">現在のデータを確認</button>
+        
+        <div id="status" class="status"></div>
+        <div id="dataDisplay" style="margin-top: 20px;"></div>
+    </div>
+
+    <script>
+        function setupDemoData() {
+            // ストリーク数を設定（7日連続）
+            localStorage.setItem('circuitStreak', '7');
+            
+            // 週間記録データを設定
+            const now = new Date();
+            const records = {};
+            
+            // 過去7日間のサンプル記録を作成
+            for (let i = 0; i < 7; i++) {
+                const date = new Date(now);
+                date.setDate(now.getDate() - i);
+                const dateStr = date.toDateString();
+                
+                // ランダムにデータがある日とない日を作成
+                if (i !== 1 && i !== 4) { // 1日と4日前はデータなしに
+                    records[dateStr] = {
+                        food: {
+                            breakfast: i === 0 ? 'ご飯、味噌汁、納豆、卵焼き (約450kcal)' : 
+                                     i === 2 ? 'トースト、サラダ、ヨーグルト (約380kcal)' :
+                                     i === 3 ? 'オートミール、バナナ、牛乳 (約420kcal)' :
+                                     'パンケーキ、フルーツ (約500kcal)',
+                            lunch: i === 0 ? 'チキンサラダ、玄米 (約600kcal)' :
+                                  i === 2 ? 'パスタ、野菜スープ (約580kcal)' :
+                                  i === 3 ? 'サンドイッチ、野菜ジュース (約520kcal)' :
+                                  '弁当、お茶 (約650kcal)',
+                            dinner: i === 0 ? '焼き魚、ご飯、野菜炒め (約700kcal)' :
+                                   i === 2 ? 'ハンバーグ、サラダ、ご飯 (約750kcal)' :
+                                   i === 3 ? '鶏の唐揚げ、ご飯、味噌汁 (約800kcal)' :
+                                   'カレーライス、サラダ (約720kcal)',
+                            snack: i === 0 ? 'プロテインバー (約200kcal)' :
+                                  i === 2 ? 'ナッツ、コーヒー (約150kcal)' :
+                                  i === 3 ? 'フルーツ (約100kcal)' :
+                                  'チョコレート (約180kcal)'
+                        },
+                        exercise: {
+                            running: i === 0 ? '30' : i === 2 ? '25' : i === 3 ? '20' : '35',
+                            walking: i === 0 ? '8500' : i === 2 ? '7200' : i === 3 ? '9000' : '6800',
+                            strength: i === 0 ? '20' : i === 2 ? '15' : i === 3 ? '25' : '30',
+                            other: i === 0 ? 'タバタワークアウト完了' : 
+                                  i === 2 ? 'ヨガ 30分' :
+                                  i === 3 ? 'サイクリング' :
+                                  'ストレッチ 15分'
+                        },
+                        timestamp: new Date(date).toISOString()
+                    };
+                }
+            }
+            
+            // 今日のデータも設定
+            const today = now.toDateString();
+            records[today] = {
+                food: {
+                    breakfast: 'ご飯、味噌汁、納豆、卵焼き (約450kcal)',
+                    lunch: 'チキンサラダ、玄米 (約600kcal)',
+                    dinner: '',
+                    snack: 'プロテインバー (約200kcal)'
+                },
+                exercise: {
+                    running: '30',
+                    walking: '8500',
+                    strength: '20',
+                    other: 'タバタワークアウト完了'
+                },
+                timestamp: new Date().toISOString()
+            };
+            
+            localStorage.setItem('circuitRecords', JSON.stringify(records));
+            
+            showStatus('✅ デモデータが正常に設定されました！', 'success');
+        }
+        
+        function clearData() {
+            localStorage.removeItem('circuitStreak');
+            localStorage.removeItem('circuitRecords');
+            showStatus('🗑️ すべてのデータがクリアされました。', 'success');
+        }
+        
+        function viewData() {
+            const streak = localStorage.getItem('circuitStreak') || '0';
+            const records = JSON.parse(localStorage.getItem('circuitRecords') || '{}');
+            
+            let html = '<h3>現在のデータ:</h3>';
+            html += `<p><strong>ストリーク:</strong> ${streak}日連続</p>`;
+            html += `<p><strong>記録データ数:</strong> ${Object.keys(records).length}件</p>`;
+            
+            if (Object.keys(records).length > 0) {
+                html += '<h4>記録の概要:</h4><ul>';
+                Object.keys(records).slice(0, 5).forEach(date => {
+                    const record = records[date];
+                    const hasFood = record.food && Object.values(record.food).some(v => v);
+                    const hasExercise = record.exercise && Object.values(record.exercise).some(v => v);
+                    html += `<li>${new Date(date).toLocaleDateString('ja-JP')} - 
+                            ${hasFood ? '🍽️ 食事' : ''} 
+                            ${hasExercise ? '🏃‍♂️ 運動' : ''}</li>`;
+                });
+                html += '</ul>';
+            }
+            
+            document.getElementById('dataDisplay').innerHTML = html;
+        }
+        
+        function showStatus(message, type) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = `status ${type}`;
+            status.style.display = 'block';
+            
+            setTimeout(() => {
+                status.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

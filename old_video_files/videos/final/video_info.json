@@ -1,0 +1,22 @@
+{
+    "title": "CIRCUIT - F1テーマの筋トレアプリ解説動画",
+    "description": "たった4分で効果的な全身トレーニングができるタバタ式ワークアウトアプリの紹介動画",
+    "duration": "60秒",
+    "resolution": "1280x720 (HD)",
+    "framerate": "5fps",
+    "app_url": "https://circuit-workout.com",
+    "features": [
+        "タバタ式サーキットトレーニング",
+        "F1テーマの習慣化システム",
+        "カロリー・進捗管理",
+        "完全無料Web アプリ"
+    ],
+    "target_audience": "筋トレ初心者、忙しい現代人",
+    "call_to_action": "今すぐWebブラウザから無料で始められます",
+    "created": "2025-08-21T23:43:22+09:00",
+    "files": {
+        "main_video": "circuit_explanation_complete.mp4",
+        "audio_only": "circuit_explanation_complete_audio.wav",
+        "thumbnail": "circuit_explanation_final.png"
+    }
+}
