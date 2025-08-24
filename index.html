@@ -233,6 +233,62 @@
             width: 0%;
             transition: width 0.1s;
         }
+        
+        .footer {
+            margin-top: 40px;
+            padding: 30px 0;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            text-align: center;
+        }
+        
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-nav a {
+            color: #4ecdc4;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+        
+        .footer-nav a:hover {
+            background: rgba(78, 205, 196, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .footer-contact {
+            opacity: 0.8;
+            font-size: 0.85em;
+        }
+        
+        .footer-contact a {
+            color: #4ecdc4;
+            text-decoration: none;
+        }
+        
+        .footer-contact a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-nav {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+            
+            .footer-nav a {
+                display: block;
+                min-width: 180px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -772,5 +828,17 @@
             document.getElementById('streakCounter').textContent = savedStreak;
         });
     </script>
+
+    <!-- フッターナビゲーション -->
+    <footer class="footer">
+        <div class="footer-nav">
+            <a href="about/">ℹ️ サイトについて</a>
+            <a href="privacy/">🔒 プライバシーポリシー</a>
+            <a href="terms/">📋 利用規約</a>
+        </div>
+        <div class="footer-contact">
+            <p>お問い合わせ: <a href="mailto:circuit.workout.app@gmail.com">circuit.workout.app@gmail.com</a></p>
+        </div>
+    </footer>
 </body>
 </html>
