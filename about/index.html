@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サイトについて - CIRCUIT</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏎️</text></svg>">
+    <meta name="description" content="CIRCUITについて。F1テーマのタバタ式サーキットトレーニングアプリの理念、運営者情報、お問い合わせ先をご紹介します。">
+    <meta name="robots" content="index, follow">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #ff6b6b;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.8;
+        }
+        
+        .content {
+            background: white;
+            color: black;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            color: black;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        h2 {
+            color: black;
+            font-size: 1.5em;
+            margin: 30px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ddd;
+        }
+        
+        h3 {
+            color: black;
+            font-size: 1.2em;
+            margin: 20px 0 10px 0;
+        }
+        
+        p, li {
+            color: black;
+            margin-bottom: 10px;
+        }
+        
+        ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .highlight-box {
+            background: #f8f9fa;
+            border-left: 4px solid #ff6b6b;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            color: black;
+        }
+        
+        .feature-box {
+            background: #f0f8ff;
+            border-left: 4px solid #4ecdc4;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            color: black;
+        }
+        
+        .contact-info {
+            background: #f8f9fa;
+            border-left: 4px solid #ccc;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            color: black;
+            text-align: center;
+        }
+        
+        .nav {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .nav a {
+            color: #4ecdc4;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .nav a:hover {
+            background: rgba(78, 205, 196, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-item {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            color: black;
+        }
+        
+        .stat-number {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .timeline-item {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            position: relative;
+            color: black;
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: #ff6b6b;
+            margin-bottom: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .logo {
+                font-size: 2em;
+            }
+            
+            h1 {
+                font-size: 1.6em;
+            }
+            
+            .nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+            }
+            
+            .nav a {
+                flex: 0 0 calc(50% - 8px);
+                margin: 2px;
+                padding: 8px 12px;
+                font-size: 0.85em;
+                text-align: center;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">CIRCUIT 🏎️</div>
+            <div class="subtitle">F1スタイル筋トレ・ダイエットアプリ</div>
+        </div>
+        
+        <nav class="nav">
+            <a href="../">🏠 ホーム</a>
+            <a href="../record.html">📝 記録</a>
+            <a href="../equipment/">🛒 器具</a>
+            <a href="../privacy/">🔒 プライバシー</a>
+            <a href="../terms/">📋 利用規約</a>
+        </nav>
+        
+        <div class="content">
+            <h1>サイトについて</h1>
+            
+            <div class="highlight-box">
+                <h2>🏎️ CIRCUITとは</h2>
+                <p><strong>CIRCUIT</strong>は、F1レースをテーマにしたタバタ式サーキットトレーニングWebアプリです。たった4分間で効果的な全身運動ができ、毎日の「完走」を目指すことで楽しく運動習慣を身につけることができます。</p>
+                
+                <h3>名前に込められた3つの意味</h3>
+                <ul>
+                    <li>🏃‍♂️ <strong>サーキットトレーニング</strong> - タバタ式の効率的な運動</li>
+                    <li>🏎️ <strong>F1サーキット</strong> - 継続的な周回（習慣化）</li>
+                    <li>⚡ <strong>電子回路</strong> - 運動→食事→記録の循環する仕組み</li>
+                </ul>
+            </div>
+            
+            <h2>🎯 サービスの特徴</h2>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">4分</div>
+                    <div>ワークアウト時間</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">6種類</div>
+                    <div>エクササイズ</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">8セット</div>
+                    <div>運動構成</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">完全無料</div>
+                    <div>基本機能</div>
+                </div>
+            </div>
+            
+            <div class="feature-box">
+                <h3>💪 搭載されているエクササイズ</h3>
+                <ul>
+                    <li><strong>プッシュアップ</strong> - 上半身の筋力強化</li>
+                    <li><strong>シットアップ</strong> - 腹筋・体幹の強化</li>
+                    <li><strong>スクワット</strong> - 下半身全体の強化</li>
+                    <li><strong>ジャンピングジャック</strong> - 有酸素運動・全身運動</li>
+                    <li><strong>ロシアンツイスト</strong> - 腹斜筋・体幹ひねり</li>
+                    <li><strong>マウンテンクライマー</strong> - 有酸素・全身筋力</li>
+                </ul>
+            </div>
+            
+            <h2>🎪 タバタ式トレーニングとは</h2>
+            <p>タバタ式トレーニングは、田畑泉博士が開発した高強度インターバルトレーニング（HIIT）です：</p>
+            <ul>
+                <li><strong>20秒間</strong>の高強度運動</li>
+                <li><strong>10秒間</strong>の休憩</li>
+                <li>これを<strong>8セット繰り返し</strong></li>
+                <li>総時間<strong>4分間</strong>で効率的な運動効果</li>
+            </ul>
+            
+            <div class="feature-box">
+                <h3>✨ 期待できる効果</h3>
+                <ul>
+                    <li>有酸素能力の向上</li>
+                    <li>筋力・筋持久力の向上</li>
+                    <li>脂肪燃焼効果</li>
+                    <li>基礎代謝の向上</li>
+                    <li>時短での効率的運動</li>
+                </ul>
+            </div>
+            
+            <h2>🏆 主要機能</h2>
+            
+            <h3>⏱️ スマートタイマー機能</h3>
+            <ul>
+                <li>準備時間5秒のカウントダウン</li>
+                <li>運動20秒・休憩10秒の正確なタイミング</li>
+                <li>視覚的で分かりやすい進捗表示</li>
+                <li>次の運動の予告表示</li>
+            </ul>
+            
+            <h3>📊 記録・管理機能</h3>
+            <ul>
+                <li>連続完走日数の表示（ストリーク機能）</li>
+                <li>摂取カロリー・消費カロリーの管理</li>
+                <li>食事記録（朝食・昼食・夕食・間食）</li>
+                <li>運動記録（タバタ・ランニング・ウォーキング・筋トレ）</li>
+            </ul>
+            
+            <h3>🎮 ユーザビリティ</h3>
+            <ul>
+                <li>スマートフォン・タブレット・PC完全対応</li>
+                <li>インストール不要のWebアプリ</li>
+                <li>オフラインでも基本機能が利用可能</li>
+                <li>F1テーマの楽しいデザイン</li>
+            </ul>
+            
+            <h2>📈 開発の経緯</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">🎯 コンセプト設計</div>
+                    <p>「筋トレ習慣のない初心者が楽しく継続できるアプリ」を目標に、F1レースをテーマとした習慣化システムを設計</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">⚡ タバタ式採用</div>
+                    <p>科学的根拠に基づく効率的なトレーニング方法として、4分間で効果が期待できるタバタ式を採用</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">🎨 UI/UX設計</div>
+                    <p>初心者でも迷わず使えるシンプルなインターface設計と、モチベーション維持のためのゲーミフィケーション要素を実装</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">🚀 リリース・運用</div>
+                    <p>GitHub Pagesでの無料公開を開始。ユーザーフィードバックを基にした継続的な改善を実施中</p>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <h2>💝 私たちの想い</h2>
+                <p>運動は「継続」が最も重要です。CIRCUITは、忙しい現代人でも<strong>「毎日4分だけなら続けられる」</strong>という体験を提供したいと考えています。</p>
+                <p>F1レースのように、毎日の「完走」を積み重ねることで、気がつけば運動が習慣になり、健康的な生活を送れるようになる。そんなサポートができるアプリを目指しています。</p>
+            </div>
+            
+            <div class="contact-info">
+                <h2>📞 お問い合わせ</h2>
+                <p><strong>サイト名</strong>: CIRCUIT</p>
+                <p><strong>URL</strong>: <a href="https://circuit-workout.com" style="color: #4ecdc4;">https://circuit-workout.com</a></p>
+                <p><strong>お問い合わせ</strong>: <a href="mailto:circuit.workout.app@gmail.com" style="color: #4ecdc4;">circuit.workout.app@gmail.com</a></p>
+                
+                <p style="margin-top: 20px; font-size: 0.9em; opacity: 0.8;">
+                    バグ報告、機能要望、ご質問等がございましたら、<br>
+                    お気軽にメールでお問い合わせください。
+                </p>
+            </div>
+            
+            <h2>⚖️ 法的事項</h2>
+            <ul>
+                <li><a href="../privacy/" style="color: #4ecdc4;">プライバシーポリシー</a> - 個人情報の取り扱いについて</li>
+                <li><a href="../terms/" style="color: #4ecdc4;">利用規約</a> - サービス利用条件・免責事項</li>
+            </ul>
+            
+            <p style="text-align: center; margin-top: 30px; font-style: italic; opacity: 0.7;">
+                最終更新日: 2024年8月22日
+            </p>
+        </div>
+        
+        <nav class="nav">
+            <a href="../">🏠 ホーム</a>
+            <a href="../record.html">📝 記録</a>
+            <a href="../equipment/">🛒 器具</a>
+            <a href="../privacy/">🔒 プライバシー</a>
+            <a href="../terms/">📋 利用規約</a>
+        </nav>
+    </div>
+</body>
+</html>
