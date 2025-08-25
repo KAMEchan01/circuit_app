@@ -251,11 +251,12 @@
         .footer-nav a {
             color: #4ecdc4;
             text-decoration: none;
-            padding: 8px 16px;
+            padding: 8px 12px;
             border-radius: 20px;
             background: rgba(255,255,255,0.1);
             transition: all 0.3s ease;
-            font-size: 0.9em;
+            font-size: 0.85em;
+            white-space: nowrap;
         }
         
         .footer-nav a:hover {
@@ -279,14 +280,31 @@
         
         @media (max-width: 768px) {
             .footer-nav {
+                flex-wrap: wrap;
+                gap: 8px;
+                justify-content: center;
+            }
+            
+            .footer-nav a {
+                flex: 0 0 calc(50% - 8px);
+                text-align: center;
+                font-size: 0.8em;
+                padding: 6px 8px;
+                max-width: 140px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .footer-nav {
                 flex-direction: column;
-                gap: 10px;
+                gap: 8px;
                 align-items: center;
             }
             
             .footer-nav a {
-                display: block;
-                min-width: 180px;
+                flex: none;
+                min-width: 160px;
+                font-size: 0.85em;
             }
         }
     </style>
