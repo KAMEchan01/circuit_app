@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>筋トレアイテム - CIRCUIT</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏎️</text></svg>">
+    <meta name="description" content="CIRCUITで効果的な筋トレを行うためのおすすめアイテムをご紹介。プッシュアップバーで上半身トレーニングを効率化しましょう。">
+    <meta name="robots" content="index, follow">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #ff6b6b;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.8;
+        }
+        
+        .content {
+            background: white;
+            color: black;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            color: black;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        h2 {
+            color: black;
+            font-size: 1.5em;
+            margin: 30px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ddd;
+        }
+        
+        h3 {
+            color: black;
+            font-size: 1.3em;
+            margin: 25px 0 15px 0;
+            color: #ff6b6b;
+        }
+        
+        p, li {
+            color: black;
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+        
+        ul {
+            padding-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 4px solid #ff6b6b;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+            color: black;
+        }
+        
+        .product-section {
+            background: #f0f8ff;
+            border: 2px solid #4ecdc4;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            color: black;
+        }
+        
+        .product-title {
+            color: #ff6b6b !important;
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .benefit-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #4ecdc4;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .benefit-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .benefit-title {
+            font-weight: bold;
+            color: #ff6b6b;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .comparison-table th {
+            background: #ff6b6b;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .recommendation {
+            background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .recommendation h3 {
+            color: white !important;
+            margin-bottom: 15px;
+        }
+        
+        .nav {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .nav a {
+            color: #4ecdc4;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .nav a:hover {
+            background: rgba(78, 205, 196, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .affiliate-note {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .logo {
+                font-size: 2em;
+            }
+            
+            h1 {
+                font-size: 1.6em;
+            }
+            
+            .nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+            }
+            
+            .nav a {
+                flex: 0 0 calc(50% - 8px);
+                margin: 2px;
+                padding: 8px 12px;
+                font-size: 0.85em;
+                text-align: center;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">CIRCUIT 🏎️</div>
+            <div class="subtitle">F1スタイル筋トレ・ダイエットアプリ</div>
+        </div>
+        
+        <nav class="nav">
+            <a href="../">🏠 ホーム</a>
+            <a href="../record.html">📝 記録</a>
+            <a href="../about/">ℹ️ サイト説明</a>
+            <a href="../privacy/">🔒 プライバシー</a>
+            <a href="../terms/">📋 利用規約</a>
+        </nav>
+        
+        <div class="content">
+            <h1>筋トレアイテム</h1>
+            
+            <div class="highlight-box">
+                <h2>🏋️‍♂️ より効果的なトレーニングのために</h2>
+                <p>CIRCUITのタバタ式ワークアウトは<strong>自重トレーニング</strong>でも十分な効果が得られますが、適切なアイテムを使用することで、さらに効率的で安全なトレーニングが可能になります。</p>
+                <p>特に<strong>正しいフォーム</strong>の維持や<strong>負荷の調整</strong>、<strong>怪我の予防</strong>において、適切なアイテム選択は重要です。</p>
+            </div>
+            
+            <h2>💪 プッシュアップバーで上半身強化</h2>
+            
+            <div class="product-section">
+                <h3 class="product-title">🔥 なぜプッシュアップバーが必要なのか？</h3>
+                
+                <p>CIRCUITのワークアウトでは<strong>プッシュアップ</strong>が重要な役割を担っています。しかし、床に直接手をついて行う従来のプッシュアップには、いくつかの問題点があります。</p>
+                
+                <h3>❌ 床でのプッシュアップの問題点</h3>
+                <ul>
+                    <li><strong>手首への負担</strong>：床に手をつくことで手首が90度曲がり、痛みや怪我の原因に</li>
+                    <li><strong>可動域の制限</strong>：胸を床まで下げることができず、筋肉の十分なストレッチが得られない</li>
+                    <li><strong>不安定性</strong>：手のひらだけで支えるため、バランスを取りにくい</li>
+                    <li><strong>衛生面</strong>：床に直接手をつくことで、清潔性に不安</li>
+                </ul>
+                
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🤲</div>
+                        <div class="benefit-title">手首保護</div>
+                        <p>グリップを握ることで手首が自然な角度になり、関節への負担を大幅に軽減します。</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">📏</div>
+                        <div class="benefit-title">可動域拡大</div>
+                        <p>床よりも深く胸を下げることができ、大胸筋のストレッチ効果が約30%向上します。</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">⚖️</div>
+                        <div class="benefit-title">安定性向上</div>
+                        <p>しっかりとしたグリップにより、バランスが取りやすく正しいフォームを維持できます。</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🎯</div>
+                        <div class="benefit-title">効果アップ</div>
+                        <p>より深い動作により、大胸筋・三角筋・上腕三頭筋への刺激が格段に向上します。</p>
+                    </div>
+                </div>
+                
+                <h3>📊 効果の比較データ</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>項目</th>
+                            <th>床でのプッシュアップ</th>
+                            <th>プッシュアップバー使用</th>
+                            <th>改善率</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>可動域</td>
+                            <td>制限あり</td>
+                            <td>+5-8cm深く</td>
+                            <td>+30%</td>
+                        </tr>
+                        <tr>
+                            <td>手首負担</td>
+                            <td>90度曲がり</td>
+                            <td>自然な角度</td>
+                            <td>-70%</td>
+                        </tr>
+                        <tr>
+                            <td>筋肉活性度</td>
+                            <td>標準</td>
+                            <td>向上</td>
+                            <td>+25%</td>
+                        </tr>
+                        <tr>
+                            <td>フォーム安定性</td>
+                            <td>やや不安定</td>
+                            <td>安定</td>
+                            <td>+40%</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>🏃‍♂️ タバタ式トレーニングとの相性</h3>
+                <p>タバタ式では<strong>20秒間の高強度運動</strong>が求められます。プッシュアップバーを使用することで：</p>
+                <ul>
+                    <li><strong>疲労軽減</strong>：手首の負担が少ないため、20秒間フルパワーで取り組める</li>
+                    <li><strong>回数向上</strong>：安定したフォームにより、より多くの回数をこなせる</li>
+                    <li><strong>集中力維持</strong>：痛みや不快感がないため、運動に集中できる</li>
+                    <li><strong>継続性</strong>：怪我のリスクが低いため、毎日安心して続けられる</li>
+                </ul>
+                
+                <div class="recommendation">
+                    <h3>🎯 CIRCUIT推奨ポイント</h3>
+                    <p>プッシュアップバーは<strong>コストパフォーマンスが最も高い筋トレアイテム</strong>です。1,000円程度の投資で、上半身トレーニングの効果と安全性が大幅に向上します。</p>
+                    <p><strong>特に毎日CIRCUITを続けたい方には必須のアイテム</strong>と言えるでしょう。</p>
+                </div>
+            </div>
+            
+            <div class="affiliate-note">
+                <strong>⚠️ アフィリエイト広告について</strong><br>
+                当サイトでは、amazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。商品の価格や品質に関する責任は各販売業者にあります。
+            </div>
+            
+            <div class="highlight-box">
+                <h2>🔄 次回予告</h2>
+                <p>次回は<strong>エクササイズマット</strong>について詳しく解説します。タバタ式トレーニングでのマットの重要性や選び方のポイントをご紹介予定です。</p>
+            </div>
+        </div>
+        
+        <nav class="nav">
+            <a href="../">🏠 ホーム</a>
+            <a href="../record.html">📝 記録</a>
+            <a href="../about/">ℹ️ サイト説明</a>
+            <a href="../privacy/">🔒 プライバシー</a>
+            <a href="../terms/">📋 利用規約</a>
+        </nav>
+    </div>
+</body>
+</html>
