@@ -307,6 +307,70 @@
                 font-size: 0.85em;
             }
         }
+        
+        .completion-banner {
+            display: none;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+            animation: slideIn 0.5s ease;
+        }
+        
+        .completion-banner.show {
+            display: block;
+        }
+        
+        .completion-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .completion-message {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .equipment-recommendation {
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        
+        .equipment-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        .equipment-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+            color: white;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
@@ -337,6 +401,23 @@
                 <div class="progress-fill" id="progressBar"></div>
             </div>
             <button class="start-btn" id="startBtn" onclick="startWorkout()">スタート🏁</button>
+            
+            <!-- ワークアウト完了バナー -->
+            <div class="completion-banner" id="completionBanner">
+                <div class="completion-title">🎉 ワークアウト完了！</div>
+                <div class="completion-message">4分間お疲れ様でした！</div>
+                <div class="equipment-recommendation">
+                    <div style="margin-bottom: 10px;">
+                        <strong>💪 より効果的なトレーニングのために</strong>
+                    </div>
+                    <div style="font-size: 0.9em; margin-bottom: 15px;">
+                        プッシュアップバーで上半身強化をさらにアップ！
+                    </div>
+                    <a href="equipment/" class="equipment-link">
+                        🛒 おすすめアイテムを見る
+                    </a>
+                </div>
+            </div>
             
             <div class="exercise-grid" id="exerciseGrid">
                 <div class="exercise-card">プッシュアップ</div>
@@ -486,6 +567,12 @@
         function startWorkout() {
             const startBtn = document.getElementById('startBtn');
             const exerciseGrid = document.getElementById('exerciseGrid');
+            
+            // 完了バナーを隠す
+            document.getElementById('completionBanner').classList.remove('show');
+            // タイマーと運動表示を再表示
+            document.getElementById('timerDisplay').style.display = 'block';
+            document.getElementById('exerciseDisplay').style.display = 'block';
             
             if (startBtn.textContent === 'スタート🏁') {
                 // BGM再生開始
@@ -680,6 +767,16 @@
             document.getElementById('exerciseGrid').style.display = 'none';
             hideExerciseImage();
             hideNextExercise();
+            
+            // ワークアウト完了バナーを表示
+            const completionBanner = document.getElementById('completionBanner');
+            completionBanner.classList.add('show');
+            
+            // 3秒後に自動で一部隠す（アイテムリンクは残す）
+            setTimeout(() => {
+                document.getElementById('timerDisplay').style.display = 'none';
+                document.getElementById('exerciseDisplay').style.display = 'none';
+            }, 3000);
             
             // ストリーク更新
             const streakCounter = document.getElementById('streakCounter');
